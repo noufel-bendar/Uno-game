@@ -9,8 +9,8 @@ private ArrayList<Card> hand;
 private boolean isTurn;
 
 public Player (String name){
-    this.name= name;
-    this.hand= new ArrayList<Card>(); // it is empty arry
+    this.name=name;
+    this.hand=new ArrayList<Card>(); // it is empty arry
     this.isTurn=false;
 }
 public String getName(){
@@ -57,7 +57,7 @@ public ArrayList<Card> getPlayableCards(Card card){ // creat a list of playable 
     return playable;
 }
 public Card selectPlayableCard(Card card){//pick a card from the available cards
-    ArrayList<Card> playable =getPlayableCards(card);
+    ArrayList<Card> playable=getPlayableCards(card);
     if(playable.isEmpty()==false){
         System.out.println(name +"select a card to play:");
         for(int i=0; i<playable.size(); i++){
@@ -65,7 +65,7 @@ public Card selectPlayableCard(Card card){//pick a card from the available cards
         }
         Scanner in =new Scanner(System.in);
         int  s=in.nextInt()-1;
-        if( s>=0   &&   s<playable.size() ){
+        if( s>=0     &&      s<playable.size() ){
             return playable.get(s);
         }
     }
@@ -85,6 +85,4 @@ public Card selectPlayableCard(Card card){//pick a card from the available cards
 
     }
     }
-
-
 }
