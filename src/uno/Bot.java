@@ -31,7 +31,7 @@ public class Bot extends Players {
         if (!playableCards.isEmpty()) {
             return playableCards.get(0);
         }
-
+        
         return null;
     }
 }
