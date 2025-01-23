@@ -2,10 +2,11 @@ package uno;
 
 import java.util.ArrayList;
 
-public class Bot extends Players{
+public class Bot extends Players {
     public Bot(String name) {
         super(name);
     }
+
     @Override
     public void playCard(Card card) {
         if (card != null) {
@@ -15,6 +16,7 @@ public class Bot extends Players{
             System.out.println(getName() + " has no valid card to play.");
         }
     }
+
     @Override
     public Card selectPlayableCard(Card topCard) {
         ArrayList<Card> playableCards = new ArrayList<>();
@@ -29,6 +31,7 @@ public class Bot extends Players{
         if (!playableCards.isEmpty()) {
             return playableCards.get(0);
 
-        return null;
+            return null;
+        }
     }
 }
