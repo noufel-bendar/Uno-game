@@ -7,12 +7,12 @@ public abstract class Players {
 
         protected String name;
         protected ArrayList<Card> hand;
-        protected boolean isTurn;
+        protected boolean turn;
 
         public Players(String name) {
             this.name = name;
             this.hand = new ArrayList<Card>(); // it is empty arry
-            this.isTurn = false;
+            this.turn = false;
         }
         public String getName() {
             return name;
@@ -21,12 +21,12 @@ public abstract class Players {
             return hand;
         }
 
-        public boolean isTurn() {
-            return isTurn;
+        public boolean turn() {
+            return turn;
         }
 
-        public void setTurn(boolean isTurn) {
-            this.isTurn = isTurn;
+        public void setTurn(boolean turn) {
+            this.turn = turn;
         }
 
         public boolean isWinner() {
@@ -64,7 +64,7 @@ public abstract class Players {
             return playable;
         }
         public String toString() {
-            return "player: " + name + " cards: " + hand + " turn: " + isTurn;
+            return "player: " + name + " cards: " + hand + " turn: " + turn;
         }
 
         public abstract void playCard(Card card);

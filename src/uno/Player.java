@@ -8,19 +8,19 @@ public  class Player extends Players {
         super(name);
     }
     @Override
-    public void playCard(Card card) {
-        if (card != null) {
-            removeCard(card);
-            System.out.println(name + " played: " + card);
+    public void playCard(Card c) {
+        if (c != null) {
+            removeCard(c);
+            System.out.println(name + " played: " + c);
         } else {
-            System.out.println(name + "no valid card to play");
+            System.out.println(name + "\uD83D\uDE2Cno valid card to play");
         }
     }
     @Override
-    public Card selectPlayableCard(Card card){//pick a card from the available cards
-        ArrayList<Card> playable=getPlayableCards(card);
+    public Card selectPlayableCard(Card c){//pick a card from the available cards
+        ArrayList<Card> playable=getPlayableCards(c);
         if(playable.isEmpty()==false){
-            System.out.println(name +"select a card to play:");
+            System.out.println(name +"choose a card:");
             for(int i=0; i<playable.size(); i++){
                 System.out.println((i+1)+":"+playable.get(i));
             }

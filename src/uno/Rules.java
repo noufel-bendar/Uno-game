@@ -29,6 +29,9 @@ public class Rules {
             case SKIP:
                 game.skipNextPlayer();
                 break;
+            case WILD:
+                game.chooseNextColor();
+                break;
             default:
                 // Nothing
                 break;

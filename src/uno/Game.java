@@ -10,6 +10,7 @@ public class Game {
     private int currentPlayerIndex;
     private int direction;
     private Rules rules;
+    private PlayerStats stats;
 
     public Game(Deck deck) {
         this.players = new ArrayList<>();
@@ -17,6 +18,7 @@ public class Game {
         this.currentPlayerIndex = 0;
         this.direction = 1;
         this.rules = new Rules();
+        this.stats = new PlayerStats();
     }
 
     public void startGame() {
@@ -29,26 +31,32 @@ public class Game {
             playTurn();
         }
         announceWinner();
+        endGame();
     }
 
     // Setup players
     private void setupPlayers(Scanner scanner) {
         System.out.println("enter the number of players 2 , 3 or 4 \uD83D\uDE0E: ");
         int playerCount = scanner.nextInt();
-        if (playerCount < 2 || playerCount > 4) {
-            System.out.println(" \uD83E\uDD26\u200D♂\uFE0F the number of players is invalid the game requires 2 to 4 players \uD83C\uDFAE");
+        if (playerCount >4 || playerCount <2) {
+            System.out.println(" \uD83E\uDD26\u200D♂\uFE0F the number of players is invalid \uD83C\uDFAE");
             System.exit(0);
         }
         // add player
         for (int i = 0; i < playerCount; i++) {
             System.out.println("the name of Player " + (i + 1) + " is :");
             String name = scanner.next();
-            players.add(new Player(name));
+            Player player = new Player(name);
+            players.add(player);
+            stats.addPlayer(player);
+
         }
 
         // add bot if the number of  human players <4  (human. bot)= (3.1) (2.2) (4.0)
         while (players.size() < 4) {
-            players.add(new Bot("Bot \uD83E\uDD16 " + (players.size() + 1)));
+            Player bot = new Bot("Bot 🤖 " + (players.size() + 1));
+            players.add(bot);
+            stats.addPlayer(bot);
         }
     }
 
@@ -160,7 +168,7 @@ public class Game {
                 topCard = new Card(Card.Color.RED, Card.Value.WILD);
             }
         }
-        else{
+        if (currentPlayer instanceof Bot){
             Random random = new Random();
             int n = random.nextInt(4);
             String nextColor = colors.get(n);
@@ -168,6 +176,12 @@ public class Game {
             topCard = new Card(Card.Color.valueOf(nextColor), Card.Value.WILD);
         }
     }
+    private void endGame() {
+        System.out.println("\n---------- GAME OVER ----------");
+        stats.calculatePoints();
+        stats.displayRankings();
+    }
+
 
     private void announceWinner() {
         for (Player player : players) {

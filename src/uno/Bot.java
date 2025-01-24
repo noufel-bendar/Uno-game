@@ -8,10 +8,10 @@ public class Bot extends Player {
     }
 
     @Override
-    public void playCard(Card card) {
-        if (card != null) {
-            removeCard(card);
-            System.out.println(getName() + " played: " + card);
+    public void playCard(Card c) {
+        if (c != null) {
+            removeCard(c);
+            System.out.println(getName() + " played: " + c);
         } else {
             System.out.println(getName() + " has no valid card to play.");
         }
