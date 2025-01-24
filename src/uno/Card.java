@@ -47,6 +47,17 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{color=" + color + ", value=" + value + '}';
+        String colorString = color.toString();
+        String valueString = value.toString();
+    
+        int width = Math.max(colorString.length(), valueString.length()) + 4;
+    
+        StringBuilder card = new StringBuilder();
+        card.append("#".repeat(width)).append("\n");
+        card.append("# ").append(colorString).append(" ".repeat(width - colorString.length() - 3)).append("#\n");
+        card.append("# ").append(valueString).append(" ".repeat(width - valueString.length() - 3)).append("#\n");
+        card.append("#".repeat(width));
+    
+        return card.toString();
     }
 }
