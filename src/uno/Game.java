@@ -155,27 +155,25 @@ public class Game {
 
     public void chooseNextColor() {
         Player currentPlayer = players.get(currentPlayerIndex);
-
-        if(currentPlayer instanceof Player){
+        if (currentPlayer instanceof Bot) {
+            Random random = new Random();
+            int n = random.nextInt(colors.size());
+            String nextColor = colors.get(n).toUpperCase();
+            System.out.println(currentPlayer.getName() + " (Bot\uD83E\uDD16) chose color: " + nextColor);
+            topCard = new Card(Card.Color.valueOf(nextColor), Card.Value.WILD);
+        } else if (currentPlayer instanceof Player) {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Choose a color: \uD83D\uDD34 RED, \uD83D\uDD35 BLUE,\uD83D\uDFE2 GREEN,\uD83D\uDFE1 YELLOW");
-            String colorInput = scanner.next().toUpperCase();//  yrj3o toujour uppercase
-
+            System.out.println("Choose a color: \uD83D\uDD34 RED, \uD83D\uDD35 BLUE,\uD83D\uDFE2 GREEN, \uD83D\uDFE1 YELLOW");
+            String colorInput = scanner.next().toUpperCase();
             try {
                 topCard = new Card(Card.Color.valueOf(colorInput), Card.Value.WILD);
             } catch (IllegalArgumentException e) {
-                System.out.println("❌ Invalid color defaulting to RED! \uD83D\uDD34");
+                System.out.println("❌ Invalid color entered. Defaulting to RED! \uD83D\uDD34");
                 topCard = new Card(Card.Color.RED, Card.Value.WILD);
             }
         }
-        if (currentPlayer instanceof Bot){
-            Random random = new Random();
-            int n = random.nextInt(4);
-            String nextColor = colors.get(n);
-
-            topCard = new Card(Card.Color.valueOf(nextColor), Card.Value.WILD);
-        }
     }
+
     private void endGame() {
         System.out.println("\n---------- GAME OVER ----------");
         stats.calculatePoints();
