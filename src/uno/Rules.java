@@ -8,7 +8,7 @@ public class Rules {
         if (card.getValue() == topCard.getValue()) {
             return true;
         }
-        if (card.getColor() == Card.Color.WILD) {
+        if (card.getColor() == Color.WILD) {
             return true;
         }
         return false;

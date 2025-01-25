@@ -160,16 +160,16 @@ public class Game {
             int n = random.nextInt(colors.size());
             String nextColor = colors.get(n).toUpperCase();
             System.out.println(currentPlayer.getName() + " (Bot\uD83E\uDD16) chose color: " + nextColor);
-            topCard = new Card(Card.Color.valueOf(nextColor), Card.Value.WILD);
+            topCard = new Card(Color.valueOf(nextColor), Value.WILD);
         } else if (currentPlayer instanceof Player) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Choose a color: \uD83D\uDD34 RED, \uD83D\uDD35 BLUE,\uD83D\uDFE2 GREEN, \uD83D\uDFE1 YELLOW");
             String colorInput = scanner.next().toUpperCase();
             try {
-                topCard = new Card(Card.Color.valueOf(colorInput), Card.Value.WILD);
+                topCard = new Card(Color.valueOf(colorInput), Value.WILD);
             } catch (IllegalArgumentException e) {
                 System.out.println("❌ Invalid color entered. Defaulting to RED! \uD83D\uDD34");
-                topCard = new Card(Card.Color.RED, Card.Value.WILD);
+                topCard = new Card(Color.RED, Value.WILD);
             }
         }
     }

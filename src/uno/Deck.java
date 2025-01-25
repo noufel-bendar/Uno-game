@@ -14,29 +14,29 @@ public class Deck {
     }
 
     private void initializeDeck() {
-        for (Card.Color color : Card.Color.values()) {
-            if (color != Card.Color.WILD) { // Only normal colors
+        for (Color color : Color.values()) {
+            if (color != Color.WILD) { // Only normal colors
                 // Add number cards (0-9)
                 for (int i = 0; i <= 9; i++) {
-                    cards.add(new Card(color, Card.Value.values()[i]));
+                    cards.add(new Card(color, Value.values()[i]));
                     if (i != 0) {
-                        cards.add(new Card(color, Card.Value.values()[i]));
+                        cards.add(new Card(color, Value.values()[i]));
                     }
                 }
 
                 // Add special cards
                 for (int i = 0; i < 2; i++) {
-                    cards.add(new Card(color, Card.Value.SKIP));
-                    cards.add(new Card(color, Card.Value.REVERSE));
-                    cards.add(new Card(color, Card.Value.DRAW_TWO));
+                    cards.add(new Card(color, Value.SKIP));
+                    cards.add(new Card(color, Value.REVERSE));
+                    cards.add(new Card(color, Value.DRAW_TWO));
                 }
             }
         }
 
         // Add wild cards
         for (int i = 0; i < 4; i++) {
-            cards.add(new Card(Card.Color.WILD, Card.Value.WILD));
-            cards.add(new Card(Card.Color.WILD, Card.Value.WILD_DRAW_FOUR));
+            cards.add(new Card(Color.WILD, Value.WILD));
+            cards.add(new Card(Color.WILD,Value.WILD_DRAW_FOUR));
         }
     }
 

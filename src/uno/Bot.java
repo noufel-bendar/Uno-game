@@ -2,7 +2,7 @@ package uno;
 
 import java.util.ArrayList;
 
-public class Bot extends Player {
+public class Bot extends Player implements Players {
     public Bot(String name) {
         super(name);
     }

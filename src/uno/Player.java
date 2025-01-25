@@ -1,26 +1,87 @@
 package uno;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public  class Player extends Players {
+public class Player  implements Players  {
+
+    protected String name;
+    protected ArrayList<Card> hand;
+    protected boolean isTurn;
+
     public Player(String name) {
-        super(name);
+        this.name = name;
+        this.hand = new ArrayList<Card>(); // it is empty arry
+        this.isTurn = false;
     }
+    public String getName() {
+        return name;
+    }
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+
+    public boolean isTurn() {
+        return isTurn;
+    }
+
+    public void setTurn(boolean isTurn) {
+        this.isTurn = isTurn;
+    }
+
+    public boolean isWinner() {
+        return hand.isEmpty();
+    }
+
+    public void removeCard(Card card) {
+        hand.remove(card);
+    }
+
+    public void drawCard(Card card) {
+        hand.add(card);
+    }
+
+    public int getCardCount() {
+        return hand.size();
+    }
+    public boolean hasPlayableCard(Card card) {// if the player has a playable card
+        Rules rules = new Rules();
+        for (int i = 0; i < hand.size(); i++) {
+            if (rules.isValidMove(hand.get(i), card)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public ArrayList<Card> getPlayableCards(Card card) { // creat a list of playable cards
+        ArrayList<Card> playable = new ArrayList<Card>();
+        Rules rule = new Rules();
+        for (int i = 0; i < hand.size(); i++) {
+            if (rule.isValidMove(hand.get(i), card)) {// if you can play the card then add it to the array of  playable cards
+                playable.add(hand.get(i));
+            }
+        }
+        return playable;
+    }
+    public String toString() {
+        return "player \uD83C\uDFAE: " + name + " cards \uD83C\uDCCF: " + hand + " turn: " + isTurn;
+    }
+
     @Override
-    public void playCard(Card c) {
-        if (c != null) {
-            removeCard(c);
-            System.out.println(name + " played: " + c);
+    public void playCard(Card card) {
+        if (card != null) {
+            removeCard(card);
+            System.out.println(name + " played: " + card);
         } else {
-            System.out.println(name + "\uD83D\uDE2Cno valid card to play");
+            System.out.println(name + "no valid card to play\uD83D\uDE2C");
         }
     }
     @Override
-    public Card selectPlayableCard(Card c){//pick a card from the available cards
-        ArrayList<Card> playable=getPlayableCards(c);
+    public Card selectPlayableCard(Card card){//pick a card from the available cards
+        ArrayList<Card> playable=getPlayableCards(card);
         if(playable.isEmpty()==false){
-            System.out.println(name +"choose a card:");
+            System.out.println(name +"\uD83C\uDCCFselect a card to play:");
             for(int i=0; i<playable.size(); i++){
                 System.out.println((i+1)+":"+playable.get(i));
             }

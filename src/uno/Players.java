@@ -1,72 +1,27 @@
 package uno;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public abstract class Players {
+public interface Players {
+    public String getName() ;
+    public ArrayList<Card> getHand();
 
-        protected String name;
-        protected ArrayList<Card> hand;
-        protected boolean turn;
+    public boolean isTurn() ;
 
-        public Players(String name) {
-            this.name = name;
-            this.hand = new ArrayList<Card>(); // it is empty arry
-            this.turn = false;
-        }
-        public String getName() {
-            return name;
-        }
-        public ArrayList<Card> getHand() {
-            return hand;
-        }
+    public void setTurn(boolean isTurn);
 
-        public boolean turn() {
-            return turn;
-        }
+    public boolean isWinner() ;
 
-        public void setTurn(boolean turn) {
-            this.turn = turn;
-        }
+    public void removeCard(Card card) ;
 
-        public boolean isWinner() {
-            return hand.isEmpty();
-        }
+    public void drawCard(Card card) ;
 
-        public void removeCard(Card card) {
-            hand.remove(card);
-        }
+    public int getCardCount() ;
+    public boolean hasPlayableCard(Card card);
+    public ArrayList<Card> getPlayableCards(Card card);
+    public String toString() ;
 
-        public void drawCard(Card card) {
-            hand.add(card);
-        }
+    public  void playCard(Card card);
+    public  Card selectPlayableCard(Card card);
+}
 
-        public int getCardCount() {
-            return hand.size();
-        }
-        public boolean hasPlayableCard(Card card) {// if the player has a playable card
-            Rules rules = new Rules();
-            for (int i = 0; i < hand.size(); i++) {
-                if (rules.isValidMove(hand.get(i), card)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        public ArrayList<Card> getPlayableCards(Card card) { // creat a list of playable cards
-            ArrayList<Card> playable = new ArrayList<Card>();
-            Rules rule = new Rules();
-            for (int i = 0; i < hand.size(); i++) {
-                if (rule.isValidMove(hand.get(i), card)) {// if you can play the card then add it to the array of  playable cards
-                    playable.add(hand.get(i));
-                }
-            }
-            return playable;
-        }
-        public String toString() {
-            return "player: " + name + " cards: " + hand + " turn: " + turn;
-        }
-
-        public abstract void playCard(Card card);
-        public abstract Card selectPlayableCard(Card card);
-    }
